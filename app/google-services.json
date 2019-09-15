@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "925833009838",
+    "firebase_url": "https://eagle-ee1b0.firebaseio.com",
+    "project_id": "eagle-ee1b0",
+    "storage_bucket": "eagle-ee1b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925833009838:android:8871a145a0f13d2e",
+        "android_client_info": {
+          "package_name": "com.example.serasel.eagle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925833009838-i8kf46s0o2lm0arebqnruetp95kgdpsv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.serasel.eagle",
+            "certificate_hash": "e6e102bfed9d850067518b0d877607745fa7d066"
+          }
+        },
+        {
+          "client_id": "925833009838-v4i8ndi31q7k5jn77io0k2trfm18vehm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgXudlDHGQw2Dk3yW4AwWc61AWZQkz0B0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925833009838-v4i8ndi31q7k5jn77io0k2trfm18vehm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

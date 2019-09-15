@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/botnav_home"
+        android:icon="@drawable/ic_menu_home"
+        android:title="Home"/>
+
+    <item android:id="@+id/botnav_reference"
+        android:icon="@drawable/ic_menu_references"
+        android:title="References"/>
+
+    <item android:id="@+id/botnav_result"
+        android:icon="@drawable/ic_menu_result"
+        android:title="Results"/>
+
+    <item android:id="@+id/botnav_account"
+        android:icon="@drawable/ic_login_user"
+        android:title="Account"/>
+
+</menu>

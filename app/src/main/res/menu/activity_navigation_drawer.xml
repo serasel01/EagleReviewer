@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/item_nav_references"
+            android:icon="@drawable/ic_menu_references"
+            android:title="References" />
+        <!--<item-->
+            <!--android:id="@+id/item_nav_settings"-->
+            <!--android:icon="@drawable/ic_menu_settings"-->
+            <!--android:title="Settings" />-->
+        <item
+            android:id="@+id/item_nav_result"
+            android:icon="@drawable/ic_menu_result"
+            android:title="Result" />
+        <!--<item-->
+            <!--android:id="@+id/item_nav_help"-->
+            <!--android:icon="@drawable/ic_menu_help"-->
+            <!--android:title="Help &amp; Instructions" />-->
+        <!--<item-->
+            <!--android:id="@+id/item_nav_about"-->
+            <!--android:icon="@drawable/ic_menu_about"-->
+            <!--android:title="About" />-->
+        <item
+            android:id="@+id/item_nav_logout"
+            android:title="Log out" />
+
+        <!--<item android:title="Exam Subjects">-->
+            <!--<menu android:checkableBehavior="none"-->
+                <!--android:id="@+id/sidenav_subjects">-->
+            <!--</menu>-->
+        <!--</item>-->
+    </group>
+
+
+</menu>

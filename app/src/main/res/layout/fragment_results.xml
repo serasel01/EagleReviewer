@@ -1,0 +1,344 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.serasel.eagle.Fragments.ResultFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/White"
+                    android:text="Select a subject"/>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end">
+
+                        <Spinner
+                            android:id="@+id/spin_result_subjects"
+                            android:layout_gravity="center"
+                            android:backgroundTint="@color/Black"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cb_result_subtopic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/White"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Include subtopic"
+                        android:textColor="@color/White" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_result_subtopic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/White"
+                        android:text="Select a specific subtopic"/>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end">
+
+                            <Spinner
+                                android:id="@+id/spin_result_topics"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/Black"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cb_result_dateRange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/White"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Include exam dates"
+                        android:textColor="@color/White" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_result_dateRange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/btn_result_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        style="?android:textAppearanceSmall"
+                        android:foreground="?android:selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/colorAccent2"
+                        app:cardElevation="8dp"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end">
+
+                            <TextView
+                                android:id="@+id/et_result_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="Select Date Range"
+                                android:drawableEnd="@drawable/ic_result_date"
+                                android:textColor="@color/Black"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tv_result_dateFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/White"
+                        android:paddingTop="5dp"
+                        android:text="From: "/>
+
+                    <TextView
+                        android:id="@+id/tv_result_dateTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/White"
+                        android:paddingTop="5dp"
+                        android:text="To: "/>
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/btn_result_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    style="?android:textAppearanceSmall"
+                    android:foreground="?android:selectableItemBackground"
+                    app:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardElevation="8dp"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Search"
+                            android:drawableEnd="@drawable/ic_nav_search"
+                            android:textColor="@color/Black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Results:"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:contentPadding="5dp"
+                        android:layout_gravity="center_horizontal"
+                        app:cardBackgroundColor="@color/White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <TableLayout
+                                android:id="@+id/table_result"
+                                android:layout_gravity="center"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+
+                                <TableRow
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorPrimary">
+
+                                    <TextView
+                                        android:text="SCORE"
+                                        android:textColor="@color/Black"
+                                        android:padding="5dp"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:text="DIFFICULTY"
+                                        android:textColor="@color/Black"
+                                        android:padding="5dp"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:text="PERCENTAGE"
+                                        android:textColor="@color/Black"
+                                        android:textSize="14sp"
+                                        android:padding="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:text="DATE TAKEN"
+                                        android:textColor="@color/Black"
+                                        android:textSize="14sp"
+                                        android:padding="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                </TableRow>
+
+                            </TableLayout>
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+                </ScrollView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>
