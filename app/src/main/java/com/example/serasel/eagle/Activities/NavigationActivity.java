@@ -26,8 +26,11 @@ import com.example.serasel.eagle.Fragments.HomeFragment;
 import com.example.serasel.eagle.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NavigationActivity extends AppCompatActivity{
 
@@ -37,6 +40,7 @@ public class NavigationActivity extends AppCompatActivity{
     private ActionBarDrawerToggle toggle;
     private View navHeaderView;
     private TextView tv_nav_name, tv_nav_course;
+    private CircleImageView civ_nav_photo;
     private ExamDialog examDialog;
     private String topic, course;
     private Menu sidenav_subjects;
@@ -46,11 +50,17 @@ public class NavigationActivity extends AppCompatActivity{
     private FragmentTransaction fragmentTransaction;
     private HomeFragment homeFragment;
     private ResultFragment resultFragment;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        String id = SharedPrefManager.getInstance(getApplicationContext()).getKeyUserId();
+        reference = FirebaseDatabase.getInstance().getReference("Students").child(id);
+        reference.keepSynced(true);
+
         initViews();
         initFragments();
     }
@@ -81,12 +91,17 @@ public class NavigationActivity extends AppCompatActivity{
         navHeaderView = nav_sidebar.getHeaderView(0);
         tv_nav_name = navHeaderView.findViewById(R.id.tv_nav_name);
         tv_nav_course = navHeaderView.findViewById(R.id.tv_nav_course);
+        civ_nav_photo = navHeaderView.findViewById(R.id.civ_nav_photo);
 
         //set student's name and course at navigation view
         tv_nav_name.setText("Name: " +
                 SharedPrefManager.getInstance(getApplicationContext()).getKeyUserName());
         tv_nav_course.setText("Course: " +
                 SharedPrefManager.getInstance(getApplicationContext()).getKeyUserCourse());
+
+        //load reviewee's photo
+        String stu_image = SharedPrefManager.getInstance(getApplicationContext()).getKeyUserImagepath();
+        Picasso.get().load(stu_image).placeholder(R.drawable.ic_login_user).into(civ_nav_photo);
 
         bottomNav = (BottomNavigationView) findViewById(R.id.bottomNav);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavi());

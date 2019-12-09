@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 
 public class Question implements Serializable{
-    private String q_question, q_answer, q_a, q_b, q_c, q_d, q_rationale, q_uid;
+    private String q_question, q_answer, q_a, q_b, q_c, q_d, q_rationale, q_uid, q_imagePath;
 
     public Question (){}
 
@@ -21,6 +21,27 @@ public class Question implements Serializable{
         this.q_d = q_d;
         this.q_rationale = q_rationale;
         this.q_uid = q_uid;
+    }
+
+    public Question(String q_question, String q_answer, String q_a, String q_b, String q_c,
+                    String q_d, String q_rationale, String q_uid, String q_imagePath) {
+        this.q_question = q_question;
+        this.q_answer = q_answer;
+        this.q_a = q_a;
+        this.q_b = q_b;
+        this.q_c = q_c;
+        this.q_d = q_d;
+        this.q_rationale = q_rationale;
+        this.q_uid = q_uid;
+        this.q_imagePath = q_imagePath;
+    }
+
+    public String getQ_imagePath() {
+        return q_imagePath;
+    }
+
+    public void setQ_imagePath(String q_imagePath) {
+        this.q_imagePath = q_imagePath;
     }
 
     public String getQ_question() {

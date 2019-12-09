@@ -16,6 +16,8 @@ public class SharedPrefManager {
     private static final String KEY_QUIZ_CORRECTS = "quiz_corrects";
     private static final String KEY_QUIZ_WRONGS = "quiz_wrongs";
     private static final String KEY_SETTINGS_DOWNLOAD = "settings_download";
+    private static final String KEY_USER_COUNT = "user_count";
+    private static final String KEY_USER_IMAGEPATH = "user_imagePath";
 
     private SharedPrefManager(Context context){
         mCtx = context;
@@ -29,7 +31,7 @@ public class SharedPrefManager {
     }
 
     //function for saving user upon login
-    public boolean userLogin(String id, String name, String course){
+    public boolean userLogin(String id, String name, String course, int count, String imagePath){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -38,9 +40,29 @@ public class SharedPrefManager {
         editor.putString(KEY_USER_ID, id); //saves user id
         editor.putString(KEY_USER_NAME, name); // name
         editor.putString(KEY_USER_COURSE, course); //course
+        editor.putInt(KEY_USER_COUNT, count);
+        editor.putString(KEY_USER_IMAGEPATH, imagePath);
         editor.apply();
 
         return true;
+    }
+
+    public void updateImage(String imagePath){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_USER_IMAGEPATH, imagePath);
+        editor.apply();
+    }
+
+    public void updateCount(int count){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt(KEY_USER_COUNT, count);
+        editor.apply();
     }
 
     public void updateCorrects(int corrects){
@@ -95,6 +117,11 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_USER_COURSE, null);
     }
 
+    public String getKeyUserImagepath(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_IMAGEPATH, null);
+    }
+
     public int getKeyQuizCorrects(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(String.valueOf(KEY_QUIZ_CORRECTS), -1);
@@ -103,5 +130,10 @@ public class SharedPrefManager {
     public int getKeyQuizWrongs(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(String.valueOf(KEY_QUIZ_WRONGS), -1);
+    }
+
+    public int getKeyUserCount(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(String.valueOf(KEY_USER_COUNT), -1);
     }
 }

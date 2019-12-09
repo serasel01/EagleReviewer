@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.example.serasel.eagle.R;
 import com.example.serasel.eagle.Utilities.SharedPrefManager;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 
 public class QuestionFragment extends Fragment implements android.view.View.OnClickListener{
@@ -27,6 +29,7 @@ public class QuestionFragment extends Fragment implements android.view.View.OnCl
     private TextView tv_question_question, tv_question_a, tv_question_b, tv_question_c,
             tv_question_d;
     private CardView btn_question_a, btn_question_b, btn_question_c, btn_question_d, card;
+    private ImageView iv_question_photo;
     private View view;
     private RationaleDialog rationaleDialog;
     private DatabaseReference db_ref;
@@ -75,6 +78,14 @@ public class QuestionFragment extends Fragment implements android.view.View.OnCl
         btn_question_b.setOnClickListener(this);
         btn_question_c.setOnClickListener(this);
         btn_question_d.setOnClickListener(this);
+
+        //get question photo
+        if (question.getQ_imagePath() != null){
+            iv_question_photo = view.findViewById(R.id.iv_question_photo);
+            Picasso.get().load(question.getQ_imagePath())
+                    .placeholder(R.drawable.ic_launcher_background).into(iv_question_photo);
+        }
+
     }
 
     public void answer(){ //verify if correct answer

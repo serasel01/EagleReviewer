@@ -9,6 +9,7 @@ import com.example.serasel.eagle.Classes.Exam;
 import com.example.serasel.eagle.Classes.Question;
 import com.example.serasel.eagle.Classes.Result;
 import com.example.serasel.eagle.Classes.Student;
+import com.example.serasel.eagle.Dialogs.DeleteDialog;
 import com.example.serasel.eagle.Dialogs.DetailsDialog;
 import com.example.serasel.eagle.Dialogs.DownloadsDialog;
 import com.example.serasel.eagle.Dialogs.ExamDialog;
@@ -50,6 +51,7 @@ public class FirebaseCaller {
                 //gets id and password from edittext fields
                 String db_id = dataSnapshot.child("stu_id").getValue().toString();
                 String db_password = dataSnapshot.child("stu_password").getValue().toString();
+
 
                 if(db_id.equals(id) && db_password.equals(password)){
                     Student log_student = dataSnapshot.getValue(Student.class);
@@ -358,6 +360,25 @@ public class FirebaseCaller {
                 for(DataSnapshot examSnapshot : dataSnapshot.getChildren()){
                     Exam exam = examSnapshot.getValue(Exam.class);
                     exams.add(exam);
+                }
+
+                fb_call.onExamCallback(exams);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
+
+    public void getExams(final DeleteDialog.ExamCallback fb_call){
+        db_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> exams = new ArrayList<>();
+
+                for(DataSnapshot examSnapshot : dataSnapshot.getChildren()){
+                    Exam exam = examSnapshot.getValue(Exam.class);
+                    exams.add(exam.getEx_name());
                 }
 
                 fb_call.onExamCallback(exams);

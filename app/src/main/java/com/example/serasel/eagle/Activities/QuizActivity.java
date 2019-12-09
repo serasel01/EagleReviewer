@@ -185,6 +185,32 @@ public class QuizActivity extends AppCompatActivity {
 
         resultDialog.setCancelable(false);
         resultDialog.show();
+
+        String id = SharedPrefManager.getInstance(getApplicationContext()).getKeyUserId();
+        int count = SharedPrefManager.getInstance(getApplicationContext()).getKeyUserCount() + 1;
+        String course = SharedPrefManager.getInstance(getApplicationContext()).getKeyUserCourse();
+
+        addExamCounter(id, count);
+        addExamBatch(id, count, course, percentage, result.getRes_tsMillis(), datetime);
+    }
+
+    private void addExamBatch(String id, int count, String course, Double percentage,
+                              Long res_tsMillis, String datetime) {
+        DatabaseReference batchRef = FirebaseDatabase.getInstance().getReference()
+                .child(course + " Batch").child(String.valueOf(count)).child(id);
+        batchRef.child("bat_questions").setValue(questions);
+        batchRef.child("bat_corrects").setValue(corrects);
+        batchRef.child("bat_percent").setValue(percentage);
+        batchRef.child("bat_tsMillis").setValue(res_tsMillis);
+        batchRef.child("bat_date").setValue(datetime);
+
+    }
+
+    private void addExamCounter(String id, int count) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Students")
+                .child(id).child("stu_count");
+        userRef.setValue(count);
+        SharedPrefManager.getInstance(getApplicationContext()).updateCount(count);
     }
 
     public interface QuizCountCallback {

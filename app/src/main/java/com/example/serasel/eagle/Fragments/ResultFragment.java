@@ -1,10 +1,12 @@
 package com.example.serasel.eagle.Fragments;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -224,27 +226,6 @@ public class ResultFragment extends Fragment{
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-//
-//
-//
-//                dateRef = resultRef.startAt(String.valueOf(tsFrom)).endAt(String.valueOf(tsTo));
-//
-////                dateRef.addValueEventListener(new ValueEventListener() {
-////                    @Override
-////                    public void onDataChange(DataSnapshot dataSnapshot) {
-////                        if(dataSnapshot.child("Subtopics").child("1").getValue() == topic){
-////                            //show results
-////                        }
-////                    }
-////
-////                    @Override
-////                    public void onCancelled(DatabaseError databaseError) {
-////
-////                    }
-////                });
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
         }
     }
 
@@ -292,6 +273,9 @@ public class ResultFragment extends Fragment{
                         new FirebaseResultCallback() {
                     @Override
                     public void onResultCallback(ArrayList<Result> results) {
+                        table_result.removeAllViews();
+                        createTableHeader();
+
                         for (Result result : results){
                             TableRow tableRow = new TableRow(getContext());
 
@@ -323,6 +307,40 @@ public class ResultFragment extends Fragment{
                 });
 
         }
+    }
+
+    private void createTableHeader() {
+        TableRow header = new TableRow(getContext());
+        header.setBackgroundResource(R.color.colorPrimary);
+
+        float density = getContext().getResources().getDisplayMetrics().density;
+        int paddingPixel = (int)(5 * density);
+
+        for (int i=0; i<4; i++){ //4 columns
+            TextView textView = new TextView(getContext());
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextColor(Color.BLACK);
+            textView.setPadding(paddingPixel,paddingPixel,paddingPixel,paddingPixel);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            textView.setTypeface(Typeface.DEFAULT_BOLD);
+
+            switch (i){
+                case 0: //score column
+                    textView.setText("SCORE");
+                    break;
+                case 1: //difficulty
+                    textView.setText("DIFFICULTY");
+                    break;
+                case 2: //percent
+                    textView.setText("PERCENTAGE");
+                    break;
+                case 3: //date
+                    textView.setText("DATE TAKEN");
+                    break;
+            }
+            header.addView(textView); // add data into a row
+        }
+        table_result.addView(header); //add the row into the table
     }
 
     private class ViewDetails implements View.OnClickListener {

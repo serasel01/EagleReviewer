@@ -33,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initViews();
         checkIfLoggedin();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.setPersistenceEnabled(true);
     }
 
     //interfaces in this app are used to get parameters/values in asynchronous functions (Retrieving Firebase Data)
@@ -60,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         animationDrawable = (AnimationDrawable) login_background.getBackground();
         animationDrawable.start();
 
-        userRef = FirebaseDatabase.getInstance().getReference().child("Students");
         navIntent = new Intent(LoginActivity.this, NavigationActivity.class);
 
     }
@@ -80,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             //get text from editext of user and password fields
             id = et_login_username.getText().toString();
             password = et_login_password.getText().toString();
-            userRef = (DatabaseReference) userRef.child(id);
+            userRef = FirebaseDatabase.getInstance().getReference().child("Students").child(id);
 
             //parameters are context and database reference
             new FirebaseCaller(getApplicationContext(), userRef).verifyUser(id, password,
@@ -90,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                             //verifyUser gets
                             SharedPrefManager.getInstance(getApplicationContext())
                                     .userLogin(student.getStu_id(), student.getStu_name(),
-                                            student.getStu_course());
+                                            student.getStu_course(), student.getStu_count(),
+                                            student.getStu_imagePath());
                             proceedLogin();
                         }
             });

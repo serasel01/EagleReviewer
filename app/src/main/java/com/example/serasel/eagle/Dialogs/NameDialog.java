@@ -27,10 +27,11 @@ public class NameDialog extends Dialog implements android.view.View.OnClickListe
     private Activity activity;
     private String examName, id,  course, topic, ex_subtopic;
     private Exam exam;
-    private DatabaseReference question_ref, user_ref;
+    private DatabaseReference question_ref, user_ref, reference;
     private ArrayList<String> checkedTopics;
     private HashSet<String> question_uids;
     private int count = 1, current_number = 1;
+    private static final String NUMERIC_STRING = "0123456789";
 
     public NameDialog(Activity activity, Exam exam, ArrayList<String> checkedTopics) {
         super(activity);
@@ -112,8 +113,9 @@ public class NameDialog extends Dialog implements android.view.View.OnClickListe
     }
 
     private void saveExam() {
-        exam = new Exam(View.generateViewId(), examName, exam.getEx_difficulty(), exam.getEx_genSubject(),
-                exam.getEx_hours(), exam.getEx_mins(), exam.getEx_secs(), exam.getEx_questions());
+        exam = new Exam(Integer.parseInt(randomAlphaNumeric(4)), examName,
+                exam.getEx_difficulty(), exam.getEx_genSubject(), exam.getEx_hours(),
+                exam.getEx_mins(), exam.getEx_secs(), exam.getEx_questions());
         user_ref.setValue(exam);
 
         if(ex_subtopic == null){
@@ -129,6 +131,13 @@ public class NameDialog extends Dialog implements android.view.View.OnClickListe
 
         Toast.makeText(getContext(), "Your exam has successfully downloaded",
                 Toast.LENGTH_SHORT).show();
+
+
+
+        String id = SharedPrefManager.getInstance(activity).getKeyUserId();
+        reference = FirebaseDatabase.getInstance().getReference("Students").child(id);
+        reference.keepSynced(true);
+
     }
 
     private void getQuestions() {
@@ -174,5 +183,14 @@ public class NameDialog extends Dialog implements android.view.View.OnClickListe
 
     private void addQuestionToExam(Question question) {
         user_ref.child("Questions").child(question.getQ_uid()).setValue(question);
+    }
+
+    public static String randomAlphaNumeric(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int) (Math.random() * NUMERIC_STRING.length());
+            builder.append(NUMERIC_STRING.charAt(character));
+        }
+        return builder.toString();
     }
 }

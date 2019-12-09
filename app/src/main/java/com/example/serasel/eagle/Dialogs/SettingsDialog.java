@@ -30,12 +30,12 @@ public class SettingsDialog extends Dialog implements android.view.View.OnClickL
     private Activity activity;
     private Intent quizIntent;
     private CardView btn_settings_takeOnline, btn_settings_download, btn_settings_cancel;
-    private EditText et_settings_questions, et_settings_hour, et_settings_min, et_settings_sec;
+    private EditText et_settings_hour, et_settings_min, et_settings_sec;
     private TextView tv_settings_difficulty;
     private Spinner spin_settings_difficulty;
     private ArrayAdapter<CharSequence> difficulty_adapter;
     private String gen_subject, difficulty;
-    private int questions, hours, mins, secs;
+    private int questions = 100, hours, mins, secs;
     private ArrayList<String> checkedTopics;
     private Exam exam;
 
@@ -68,7 +68,6 @@ public class SettingsDialog extends Dialog implements android.view.View.OnClickL
         btn_settings_download = findViewById(R.id.btn_settings_download);
         btn_settings_download.setOnClickListener(this);
 
-        et_settings_questions = findViewById(R.id.et_settings_questions);
         et_settings_hour = findViewById(R.id.et_settings_hour);
         et_settings_min = findViewById(R.id.et_settings_min);
         et_settings_sec = findViewById(R.id.et_settings_sec);
@@ -96,7 +95,6 @@ public class SettingsDialog extends Dialog implements android.view.View.OnClickL
 
     @Override
     public void onClick(View v) {
-        questions = Integer.parseInt(et_settings_questions.getText().toString());
         hours = Integer.parseInt(et_settings_hour.getText().toString());
         mins = Integer.parseInt(et_settings_min.getText().toString());
         secs = Integer.parseInt(et_settings_sec.getText().toString());

@@ -31,7 +31,7 @@ public class DownloadsDialog extends Dialog implements android.view.View.OnClick
     private Activity activity;
     private RadioGroup rg_download_exams;
     private RadioButton rb_download_exam;
-    private CardView btn_download_confirm, btn_download_cancel;
+    private CardView btn_download_confirm, btn_download_cancel, btn_download_delete;
     private String id, examName;
     private DatabaseReference exam_ref;
     private Intent quizIntent;
@@ -82,8 +82,10 @@ public class DownloadsDialog extends Dialog implements android.view.View.OnClick
 
         btn_download_confirm = findViewById(R.id.btn_download_confirm);
         btn_download_cancel = findViewById(R.id.btn_download_cancel);
+        btn_download_delete = findViewById(R.id.btn_download_delete);
         btn_download_confirm.setOnClickListener(this);
         btn_download_cancel.setOnClickListener(this);
+        btn_download_delete.setOnClickListener(this);
     }
 
     @Override
@@ -94,6 +96,12 @@ public class DownloadsDialog extends Dialog implements android.view.View.OnClick
                 break;
 
             case R.id.btn_download_cancel:
+                break;
+
+            case R.id.btn_download_delete:
+                DeleteDialog deleteDialog = new DeleteDialog(activity);
+                deleteDialog.setCancelable(false);
+                deleteDialog.show();
                 break;
 
             default:
