@@ -1,6 +1,7 @@
 package com.example.serasel.eagle.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -24,8 +25,11 @@ import com.example.serasel.eagle.Utilities.SharedPrefManager;
 import com.example.serasel.eagle.Dialogs.ExamDialog;
 import com.example.serasel.eagle.Fragments.HomeFragment;
 import com.example.serasel.eagle.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -51,6 +55,7 @@ public class NavigationActivity extends AppCompatActivity{
     private HomeFragment homeFragment;
     private ResultFragment resultFragment;
     private DatabaseReference reference;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,9 @@ public class NavigationActivity extends AppCompatActivity{
         String id = SharedPrefManager.getInstance(getApplicationContext()).getKeyUserId();
         reference = FirebaseDatabase.getInstance().getReference("Students").child(id);
         reference.keepSynced(true);
+
+        storageReference = FirebaseStorage.getInstance()
+                .getReferenceFromUrl("gs://eagle-ee1b0.appspot.com/Reviewees/" + id + ".jpg");
 
         initViews();
         initFragments();
@@ -100,8 +108,12 @@ public class NavigationActivity extends AppCompatActivity{
                 SharedPrefManager.getInstance(getApplicationContext()).getKeyUserCourse());
 
         //load reviewee's photo
-        String stu_image = SharedPrefManager.getInstance(getApplicationContext()).getKeyUserImagepath();
-        Picasso.get().load(stu_image).placeholder(R.drawable.ic_login_user).into(civ_nav_photo);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).placeholder(R.drawable.ic_login_user).into(civ_nav_photo);
+            }
+        });
 
         bottomNav = (BottomNavigationView) findViewById(R.id.bottomNav);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavi());

@@ -19,8 +19,11 @@ import com.example.serasel.eagle.Classes.Question;
 import com.example.serasel.eagle.Dialogs.RationaleDialog;
 import com.example.serasel.eagle.R;
 import com.example.serasel.eagle.Utilities.SharedPrefManager;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 
@@ -33,6 +36,7 @@ public class QuestionFragment extends Fragment implements android.view.View.OnCl
     private View view;
     private RationaleDialog rationaleDialog;
     private DatabaseReference db_ref;
+    private StorageReference question_image_ref;
     private String course, selection = "";
 
     private Question question;
@@ -80,10 +84,19 @@ public class QuestionFragment extends Fragment implements android.view.View.OnCl
         btn_question_d.setOnClickListener(this);
 
         //get question photo
+        question_image_ref = FirebaseStorage.getInstance()
+                .getReferenceFromUrl("gs://eagle-ee1b0.appspot.com/Questions/" +
+                        question.getQ_uid() + ".jpg");
+
         if (question.getQ_imagePath() != null){
             iv_question_photo = view.findViewById(R.id.iv_question_photo);
-            Picasso.get().load(question.getQ_imagePath())
-                    .placeholder(R.drawable.ic_launcher_background).into(iv_question_photo);
+            question_image_ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Picasso.get().load(uri).placeholder(R.drawable.ic_launcher_background)
+                            .into(iv_question_photo);
+                }
+            });
         }
 
     }
